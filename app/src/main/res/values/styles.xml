@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textStyle">normal</item>
+        <item name="fontFamily">@font/lato_bold</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="TextAppearance.Subtitle" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textStyle">normal</item>
+        <item name="fontFamily">@font/lato</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.body1" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/lato_light</item>
+    </style>
+    <style name="TextAppearance.body2" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/lato</item>
+    </style>
+</resources>
