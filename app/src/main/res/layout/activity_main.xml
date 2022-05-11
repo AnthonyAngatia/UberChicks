@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/testLayout"
-        layout="@layout/item_product"
+        layout="@layout/item_cart_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

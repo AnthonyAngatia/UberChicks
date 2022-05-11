@@ -21,4 +21,9 @@
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/lato</item>
     </style>
+    <style name="Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/button</item>
+        <item name="backgroundTint">@color/secondaryColor</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
+    </style>
 </resources>
