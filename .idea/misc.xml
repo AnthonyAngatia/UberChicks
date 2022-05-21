@@ -3,19 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/drawable/button.xml" value="0.1835" />
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/drawable/ic_baseline_remove_circle_24.xml" value="0.1835" />
         <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/drawable/item_no.xml" value="0.1835" />
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/layout/dialog_fragment_search.xml" value="0.15729166666666666" />
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/layout/fragment_home.xml" value="0.16" />
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/layout/fragment_product.xml" value="0.15806159420289856" />
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/layout/fragment_registration.xml" value="0.25" />
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/layout/item_cart_item.xml" value="0.5" />
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/layout/item_category.xml" value="0.2" />
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/layout/item_product.xml" value="0.22" />
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/layout/toolbar_fragment.xml" value="0.25" />
-        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/menu/menu.xml" value="0.15625" />
+        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/layout/activity_main.xml" value="0.1925925925925926" />
+        <entry key="..\:/Users/antho/AndroidStudioProjects/UberChicks/app/src/main/res/layout/item_product.xml" value="0.1" />
+        <entry key="..\:/Users/denni/AndroidStudioProjects/UberChicks/app/src/main/res/layout/fragment_cart_fragment.xml" value="0.2234375" />
+        <entry key="..\:/Users/denni/AndroidStudioProjects/UberChicks/app/src/main/res/layout/item_cart_item.xml" value="0.22447916666666667" />
       </map>
     </option>
   </component>
