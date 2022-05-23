@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">UberChicks</string>
+    <string name="delivery_details_label">Delivery Details</string>
+    <string name="selected_products">Selected Products</string>
+    <string name="label_delivery_details">Delivery Details</string>
+    <string name="label_change_location_details">Change Location Details</string>
+    <string name="label_contact_number">Contact Number</string>
+    <string name="label_summary">Summary</string>
+    <string name="summary_total">Total</string>
+    <string name="summary_contact_number">Contact number</string>
+    <string name="btn_checkout_text">Checkout</string>
 </resources>
