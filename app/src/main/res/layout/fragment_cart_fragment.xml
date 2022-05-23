@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cartItemsConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="639dp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/labelSelectedProduct"
@@ -29,7 +30,9 @@
             app:layout_anchorGravity="center"
             app:layout_constraintEnd_toEndOf="@+id/labelSelectedProduct"
             app:layout_constraintStart_toStartOf="@+id/labelSelectedProduct"
-            app:layout_constraintTop_toBottomOf="@+id/labelSelectedProduct" />
+            app:layout_constraintTop_toBottomOf="@+id/labelSelectedProduct"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_cart_item" />
 
         <TextView
             android:id="@+id/labelDeliveryLocation"
@@ -160,12 +163,12 @@
             style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:text="@string/btn_checkout_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelSummaryContactNumber" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.core.widget.NestedScrollView>
