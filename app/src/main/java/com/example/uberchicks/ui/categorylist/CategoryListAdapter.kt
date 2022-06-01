@@ -2,15 +2,19 @@ package com.example.uberchicks.ui.categorylist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uberchicks.databinding.ItemCategoryBinding
 import com.example.uberchicks.domain.Category
+import com.example.uberchicks.domain.Product
 import com.example.uberchicks.ui.productlist.ProductListAdapter
+import com.example.uberchicks.ui.productlist.ProductListFragmentDirections
 
-class CategoryListAdapter() :
+class CategoryListAdapter(val productListener:ProductListAdapter.OnItemClickListener) :
     ListAdapter<Category, CategoryListAdapter.CategoryListViewHolder>(DiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryListViewHolder {
@@ -32,7 +36,7 @@ class CategoryListAdapter() :
         fun binding(currentItem: Category) {
             binding.apply {
                 textviewCategoryName. text = currentItem.categoryName
-                val productAdapter = ProductListAdapter()
+                val productAdapter = ProductListAdapter(productListener)
                 recyclerViewCategories.layoutManager = LinearLayoutManager(binding.root.context,
                     LinearLayoutManager.HORIZONTAL, false)
                 productAdapter.submitList(currentItem.products)

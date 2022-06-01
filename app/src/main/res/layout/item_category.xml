@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
 
-    <TextView
+    <com.google.android.material.chip.Chip
         android:id="@+id/textview_category_name"
         style="@style/TextAppearance.Title"
         android:layout_width="wrap_content"
@@ -30,4 +30,5 @@
         app:layout_constraintTop_toBottomOf="@+id/textview_category_name"
         tools:itemCount="1"
         tools:listitem="@layout/item_product" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
