@@ -5,6 +5,7 @@ import com.example.uberchicks.Repository
 import com.example.uberchicks.network.CategoryDto
 import com.example.uberchicks.network.ProductDto
 import dagger.hilt.android.lifecycle.HiltViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel

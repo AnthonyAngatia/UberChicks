@@ -1,33 +1,42 @@
 package com.example.uberchicks.ui.cart
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.uberchicks.R
 import com.example.uberchicks.databinding.DialogFragmentAddCartBinding
-import com.example.uberchicks.ui.categorylist.CategoryListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddCartDialogFragment : DialogFragment() {
 
 //    private lateinit var binding: DialogFragmentAddCartBinding
-    private val viewmodel:CategoryListViewModel by viewModels({requireParentFragment()})
+    private val viewModel: AddCartViewModel by viewModels()
+    private lateinit var args: AddCartDialogFragmentArgs
+
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val binding = DialogFragmentAddCartBinding.inflate(inflater)
+        args = AddCartDialogFragmentArgs.fromBundle(requireArguments())
+
         getDialog()!!.getWindow()
             ?.setBackgroundDrawableResource(R.drawable.rounded_corner_shape);//Works better than seeting it in xml file
         binding.buttonCancel.setOnClickListener {
             dismiss()
         }
+        val input = binding.editTextQuantity.text.toString()
         binding.buttonAdd.setOnClickListener {
-            val x  = binding.editTextQuantity.text
+            viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+                viewModel.addToCart(args.product, input.toInt())
+            }
+
 
         }
         return binding.root
