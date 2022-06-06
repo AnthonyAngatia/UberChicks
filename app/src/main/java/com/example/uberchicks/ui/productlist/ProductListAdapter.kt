@@ -10,8 +10,8 @@ import com.example.uberchicks.R
 import com.example.uberchicks.databinding.ItemProductBinding
 import com.example.uberchicks.domain.Product
 
-class ProductListAdapter() :
-    ListAdapter<Product, ProductListAdapter.ProductListViewHolder>(DiffCallBack()) {
+class ProductListAdapter(val listener:OnItemClickListener) :
+    ListAdapter<Product, ProductListAdapter.ProductListViewHolder>(ProductListDiffCallBack()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListViewHolder {
@@ -28,7 +28,15 @@ class ProductListAdapter() :
 
     inner class ProductListViewHolder(private val binding: ItemProductBinding)
         :RecyclerView.ViewHolder(binding.root){
+
+
             fun binding(product:Product){
+//                Listen to tap on an item
+                binding.root.setOnClickListener {
+                    listener.onItemClick(product)
+                }
+
+//                Bind views to data
                 binding.apply {
                     Glide.with(itemView)
                         .load(product.imageUrl)
@@ -43,7 +51,7 @@ class ProductListAdapter() :
             }
     }
 
-    class DiffCallBack : DiffUtil.ItemCallback<Product>() {
+    class ProductListDiffCallBack : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem === newItem
         }
@@ -52,5 +60,9 @@ class ProductListAdapter() :
             return oldItem == newItem
         }
 
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(product: Product)
     }
 }

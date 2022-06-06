@@ -6,6 +6,7 @@ import android.widget.GridLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.uberchicks.R
 import com.example.uberchicks.databinding.FragmentProductListBinding
@@ -14,7 +15,7 @@ import com.example.uberchicks.network.asDomainObject
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProductListFragment : Fragment(R.layout.fragment_product_list) {
+class ProductListFragment : Fragment(R.layout.fragment_product_list), ProductListAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentProductListBinding
     private val viewModel: ProductListViewModel by viewModels()
@@ -23,7 +24,7 @@ class ProductListFragment : Fragment(R.layout.fragment_product_list) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProductListBinding.bind(view)
         //TODO: Retrieve the category id and perform a query for the products
-        val productAdapter = ProductListAdapter()
+        val productAdapter = ProductListAdapter(this)
 
         binding.recyclerViewProductList.apply {
             adapter = productAdapter
@@ -41,5 +42,10 @@ class ProductListFragment : Fragment(R.layout.fragment_product_list) {
         }
 
 
+    }
+
+    override fun onItemClick(product: Product) {
+        val action = ProductListFragmentDirections.actionGlobalAddCartDialogFragment(product)
+        findNavController().navigate(action)
     }
 }
