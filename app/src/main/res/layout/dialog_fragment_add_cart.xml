@@ -85,9 +85,9 @@
 
     <Button
         android:id="@+id/button_add"
-        android:background="@drawable/rounded_corner_shape"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_shape"
         android:text="Add"
         app:layout_constraintEnd_toEndOf="@+id/outlinedTextFieldQuantity"
         app:layout_constraintTop_toTopOf="@+id/button_cancel" />

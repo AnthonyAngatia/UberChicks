@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.uberchicks.R
 import com.example.uberchicks.databinding.DialogFragmentAddCartBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class AddCartDialogFragment : DialogFragment() {
@@ -32,6 +33,7 @@ class AddCartDialogFragment : DialogFragment() {
             dismiss()
         }
         val input = binding.editTextQuantity.text.toString()
+        Timber.i("INput is:$input")
         binding.buttonAdd.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launchWhenCreated {
                 viewModel.addToCart(args.product, input.toInt())

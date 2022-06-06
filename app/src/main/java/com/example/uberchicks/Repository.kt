@@ -4,6 +4,10 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import com.example.uberchicks.database.CartDao
+import com.example.uberchicks.database.CartDatabaseModel
+import com.example.uberchicks.database.asDatabaseModel
+import com.example.uberchicks.domain.Cart
 import com.example.uberchicks.domain.Product
 import com.example.uberchicks.network.CategoryListResponse
 import com.example.uberchicks.network.ProductDto
@@ -21,7 +25,8 @@ import javax.inject.Singleton
 @Singleton
 class Repository @Inject constructor(
     private val uberChicksApiService: UberChicksApiService,
-    private val dataStore: DataStore<Preferences>
+    private val dataStore: DataStore<Preferences>,
+    private val cartDao: CartDao
 ) {
 
     val cartPreferencesFlow: Flow<CartPreferences> = dataStore.data.catch { exception ->
@@ -83,5 +88,11 @@ class Repository @Inject constructor(
             preferences[PreferenceKeys.IMAGE_URL] = cartPreferences.product.imageUrl
 
         }
+    }
+
+    suspend fun insertToCart(item:Cart){
+        val cartDatabaseModel = item.asDatabaseModel()
+        Timber.i("Insert into cart method:${item.toString()}")
+        cartDao.insert(cartDatabaseModel)
     }
 }

@@ -20,3 +20,8 @@ data class Category(
     val categoryName: String,
     val products: List<Product>
 ) : Parcelable
+
+data class Cart(
+    val product: Product,
+    val quantity:Int
+)
