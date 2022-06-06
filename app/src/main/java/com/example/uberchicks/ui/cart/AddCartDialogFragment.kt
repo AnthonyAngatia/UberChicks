@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.uberchicks.R
 import com.example.uberchicks.databinding.DialogFragmentAddCartBinding
+import com.example.uberchicks.domain.asDomainModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -32,14 +33,12 @@ class AddCartDialogFragment : DialogFragment() {
         binding.buttonCancel.setOnClickListener {
             dismiss()
         }
-        val input = binding.editTextQuantity.text.toString()
-        Timber.i("INput is:$input")
         binding.buttonAdd.setOnClickListener {
+            val input = binding.editTextQuantity.text.toString()
             viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-                viewModel.addToCart(args.product, input.toInt())
+                viewModel.addToCart(args.productUI.asDomainModel(), input.toInt())
             }
-
-
+            dismiss()
         }
         return binding.root
     }

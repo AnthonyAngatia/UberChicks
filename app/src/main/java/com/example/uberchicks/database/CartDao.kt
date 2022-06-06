@@ -3,12 +3,19 @@ package com.example.uberchicks.database
 import androidx.room.*
 import com.example.uberchicks.domain.Cart
 import com.example.uberchicks.domain.Product
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CartDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(databaseModel: CartDatabaseModel)
+
+    @Query("SELECT * FROM CART_TABLE")
+    fun getAllCartItems():Flow<List<CartDatabaseModel>>
+
+    @Query("SELECT * FROM CART_TABLE WHERE productId = :id")
+    fun getOneItem(id:Int):Flow<CartDatabaseModel>
 
 }
 

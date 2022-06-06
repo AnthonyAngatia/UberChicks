@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.uberchicks.R
 import com.example.uberchicks.databinding.FragmentCategoryListBinding
 import com.example.uberchicks.domain.Product
+import com.example.uberchicks.domain.ProductUiModel
 import com.example.uberchicks.network.asDomainObject
 import com.example.uberchicks.ui.productlist.ProductListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,16 +38,20 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list), ProductL
             adapter = categoryListAdapter
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            //Get categories
-            val categoryList = viewModel.getCategories().map {
-                it.asDomainObject()
-            }
-            categoryListAdapter.submitList(categoryList)
+//        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+//            //Get categories
+//            val categoryList = viewModel.getCategories().map {
+//                it.asDomainObject()
+//            }
+//            //If product.id is not in the database, then put the default UI models, else update the quantity
+//            categoryListAdapter.submitList(categoryList)
+//        }
+        viewModel.categoriesUiModel.observe(viewLifecycleOwner){
+            categoryListAdapter.submitList(it)
         }
     }
 
-    override fun onItemClick(product: Product) {
+    override fun onItemClick(product: ProductUiModel) {
         val action = CategoryListFragmentDirections.actionGlobalAddCartDialogFragment(product)
         findNavController().navigate(action)
     }

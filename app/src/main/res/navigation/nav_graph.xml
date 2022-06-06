@@ -29,7 +29,7 @@
         android:label="dialog_fragment_add_cart"
         tools:layout="@layout/dialog_fragment_add_cart" >
         <argument
-            android:name="product"
-            app:argType="com.example.uberchicks.domain.Product" />
+            android:name="productUI"
+            app:argType="com.example.uberchicks.domain.ProductUiModel" />
     </dialog><action android:id="@+id/action_global_addCartDialogFragment" app:destination="@id/addCartDialogFragment"/>
 </navigation>
