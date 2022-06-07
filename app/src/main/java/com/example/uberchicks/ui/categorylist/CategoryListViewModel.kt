@@ -19,7 +19,7 @@ class CategoryListViewModel @Inject constructor(private val repository: Reposito
 
      val countAndPrice:Flow<Pair<Int, Double>> = repository.countAndPrice
 
-    private val categoriesFlow = repository.categoriesUiFlow
+    val categoriesFlow = repository.categoriesUiFlow
     val categoriesUiModel = categoriesFlow.asLiveData()
 
 //    suspend fun getCategories(): List<CategoryDto> {

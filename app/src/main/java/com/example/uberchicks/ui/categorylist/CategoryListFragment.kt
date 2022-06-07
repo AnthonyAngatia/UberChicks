@@ -12,6 +12,7 @@ import com.example.uberchicks.databinding.FragmentCategoryListBinding
 import com.example.uberchicks.domain.ProductUiModel
 import com.example.uberchicks.ui.productlist.ProductListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -47,6 +48,8 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list),
                         text = "${countPricePair.first} orders Kshs ${countPricePair.second}"
                         setOnClickListener {
                             Timber.i("Navigating to Cart")
+                            val action = CategoryListFragmentDirections.actionCategoryListFragmentToCartFragment()
+                            findNavController().navigate(action)
                         }
                     }
                 } else {
@@ -62,9 +65,16 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list),
 //            //If product.id is not in the database, then put the default UI models, else update the quantity
 //            categoryListAdapter.submitList(categoryList)
 //        }
-        viewModel.categoriesUiModel.observe(viewLifecycleOwner) {
-            categoryListAdapter.submitList(it)
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.categoriesFlow.collect{
+                categoryListAdapter.submitList(it)
+            }
         }
+
+
+//        viewModel.categoriesUiModel.observe(viewLifecycleOwner) {
+//            categoryListAdapter.submitList(it)
+//        }
     }
 
     override fun onItemClick(productUiModel: ProductUiModel) {

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_categoryListFragment_to_productListFragment"
             app:destination="@id/productListFragment" />
+        <action
+            android:id="@+id/action_categoryListFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/productListFragment"
@@ -22,6 +25,9 @@
         <argument
             android:name="category"
             app:argType="com.example.uberchicks.domain.Category" />
+        <action
+            android:id="@+id/action_productListFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <dialog
         android:id="@+id/addCartDialogFragment"
@@ -32,4 +38,9 @@
             android:name="productUI"
             app:argType="com.example.uberchicks.domain.ProductUiModel" />
     </dialog><action android:id="@+id/action_global_addCartDialogFragment" app:destination="@id/addCartDialogFragment"/>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.uberchicks.ui.cart.CartFragment"
+        android:label="fragment_cart_fragment"
+        tools:layout="@layout/fragment_cart_fragment" />
 </navigation>
