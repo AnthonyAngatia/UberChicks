@@ -9,14 +9,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.uberchicks.R
 import com.example.uberchicks.databinding.FragmentCategoryListBinding
-import com.example.uberchicks.domain.Product
 import com.example.uberchicks.domain.ProductUiModel
-import com.example.uberchicks.network.asDomainObject
 import com.example.uberchicks.ui.productlist.ProductListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
-class CategoryListFragment : Fragment(R.layout.fragment_category_list), ProductListAdapter.OnItemClickListener {
+class CategoryListFragment : Fragment(R.layout.fragment_category_list),
+    ProductListAdapter.OnItemClickListener {
 
     private val viewModel: CategoryListViewModel by viewModels<CategoryListViewModel>()
     private lateinit var binding: FragmentCategoryListBinding
@@ -38,6 +38,22 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list), ProductL
             adapter = categoryListAdapter
         }
 
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.countAndPrice.collect { countPricePair ->
+                val buttonCheckout = binding.buttonCheckoutCategoryList
+                if (countPricePair.first > 0  &&  countPricePair.second > 0.0) {
+                    buttonCheckout.apply {
+                        visibility = View.VISIBLE
+                        text = "${countPricePair.first} orders Kshs ${countPricePair.second}"
+                        setOnClickListener {
+                            Timber.i("Navigating to Cart")
+                        }
+                    }
+                } else {
+                    buttonCheckout.visibility = View.GONE
+                }
+            }
+        }
 //        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 //            //Get categories
 //            val categoryList = viewModel.getCategories().map {
@@ -46,13 +62,14 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list), ProductL
 //            //If product.id is not in the database, then put the default UI models, else update the quantity
 //            categoryListAdapter.submitList(categoryList)
 //        }
-        viewModel.categoriesUiModel.observe(viewLifecycleOwner){
+        viewModel.categoriesUiModel.observe(viewLifecycleOwner) {
             categoryListAdapter.submitList(it)
         }
     }
 
-    override fun onItemClick(product: ProductUiModel) {
-        val action = CategoryListFragmentDirections.actionGlobalAddCartDialogFragment(product)
+    override fun onItemClick(productUiModel: ProductUiModel) {
+        val action =
+            CategoryListFragmentDirections.actionGlobalAddCartDialogFragment(productUiModel)
         findNavController().navigate(action)
     }
 }

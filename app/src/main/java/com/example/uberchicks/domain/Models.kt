@@ -2,7 +2,6 @@ package com.example.uberchicks.domain
 
 import android.os.Parcelable
 import com.example.uberchicks.database.CartDatabaseModel
-import com.example.uberchicks.network.asDomainObject
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -32,7 +31,7 @@ data class ProductUiModel(
     val id: Int,
     val productName: String,
     val productPrice: Double,
-    val productDiscount: Double?,
+    val productDiscountedPrice: Double?,
     val priceDescription: String,
     val imageUrl: String,
     var quantity: Int?
@@ -43,7 +42,7 @@ fun ProductUiModel.asDomainModel():Product{
         id = this.id,
         productName = this.productName,
         productPrice = this.productPrice,
-        productDiscount = this.productDiscount,
+        productDiscount = this.productDiscountedPrice,
         priceDescription = this.priceDescription,
         imageUrl = this.imageUrl
     )

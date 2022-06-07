@@ -3,6 +3,7 @@ package com.example.uberchicks.database
 import androidx.room.*
 import com.example.uberchicks.domain.Cart
 import com.example.uberchicks.domain.Product
+import com.example.uberchicks.domain.ProductUiModel
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -12,12 +13,21 @@ interface CartDao {
     suspend fun insert(databaseModel: CartDatabaseModel)
 
     @Query("SELECT * FROM CART_TABLE")
-    fun getAllCartItems():Flow<List<CartDatabaseModel>>
+    fun getAllCartItems(): Flow<List<CartDatabaseModel>>
 
-    @Query("SELECT * FROM CART_TABLE WHERE productId = :id")
-    fun getOneItem(id:Int):Flow<CartDatabaseModel>
+    @Query("SELECT * FROM CART_TABLE WHERE productId = :key")
+    fun get(key: Int): Flow<CartDatabaseModel>
+
+    @Query("DELETE FROM cart_table")
+    fun clearCart()
+
+    @Delete
+    suspend fun deleteItem(cartDatabaseModel: CartDatabaseModel)
 
 }
+
+
+
 
 @Entity(tableName = "cart_table")
 data class CartDatabaseModel(
@@ -43,6 +53,16 @@ fun CartDatabaseModel.asDomainModel(): Cart {
             this.imageUrl
         ),
         quantity = this.quantity
+    )
+}fun ProductUiModel.asCartDatabaseModel(): CartDatabaseModel {
+    return CartDatabaseModel(
+            this.id,
+            this.productName,
+            this.productPrice,
+            this.productDiscountedPrice,
+            this.priceDescription,
+            this.imageUrl,
+        this.quantity!!
     )
 }
 
