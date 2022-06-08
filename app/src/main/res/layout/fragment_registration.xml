@@ -2,107 +2,156 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RegistrationFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   >
-    <View
-        android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:background="@drawable/inverse_curve"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".ui.registration.RegistrationFragment">
 
-    <Button
-        android:id="@+id/button_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Register"
-        style="@style/Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldLocation" />
-
-    <TextView
-        android:id="@+id/textView6"
-        style="@style/TextAppearance.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="Welcome to UberChicks"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/textView10"
-        style="@style/TextAppearance.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Registration"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+    <!-- TODO: Update blank fragment layout -->
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/outlinedTextFieldEmail"
+        android:id="@+id/outlinedTextEmailField"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:hint="Email address"
-        app:layout_constraintEnd_toEndOf="@+id/view"
+        android:hint="@string/reg_email_hint"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10">
+        app:layout_constraintTop_toBottomOf="@+id/lbl_create_account_prompt">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:fontFamily="@font/lato"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/outlinedTextFieldPhoneNumber"
+        android:id="@+id/outlinedTextFirstNameField"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Phone number"
-        app:layout_constraintEnd_toEndOf="@+id/outlinedTextFieldEmail"
-        app:layout_constraintStart_toStartOf="@+id/outlinedTextFieldEmail"
-        app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldEmail">
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/reg_first_name_field"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/outlinedTextEmailField">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextPhoneNumber"
+            android:id="@+id/editTextFirstName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:fontFamily="@font/lato"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/outlinedTextFieldLocation"
+        android:id="@+id/outlinedTextLastNameField"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Location"
-        app:layout_constraintEnd_toEndOf="@+id/outlinedTextFieldPhoneNumber"
-        app:layout_constraintStart_toStartOf="@+id/outlinedTextFieldPhoneNumber"
-        app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldPhoneNumber">
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/reg_last_name_field"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/outlinedTextFirstNameField">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextLocation"
+            android:id="@+id/editTextLastName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:fontFamily="@font/lato"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/outlinedTextPhoneNumberField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/reg_last_name_field"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/outlinedTextFirstNameField">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:fontFamily="@font/lato"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/outlinedTextPasswordField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/reg_password_field"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/outlinedTextLastNameField">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:fontFamily="@font/lato"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/lbl_create_account_prompt"
+        android:layout_width="185dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:text="Create Account"
+        android:textSize="48dp"
+        android:fontFamily="@font/lato_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/btn_check_terms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/terms_and_conditions"
+        app:layout_constraintEnd_toEndOf="@+id/outlinedTextPasswordField"
+        app:layout_constraintStart_toStartOf="@+id/outlinedTextPasswordField"
+        app:layout_constraintTop_toBottomOf="@+id/outlinedTextPasswordField"
+        android:fontFamily="@font/lato"/>
+
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_width="96dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/secondaryColor"
+        android:shadowRadius="10"
+        android:text="@string/txt_sign_up_text"
+        app:layout_constraintEnd_toEndOf="@+id/outlinedTextPasswordField"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/outlinedTextPasswordField"
+        app:layout_constraintTop_toBottomOf="@+id/btn_check_terms"
+        android:fontFamily="@font/lato_bold"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
