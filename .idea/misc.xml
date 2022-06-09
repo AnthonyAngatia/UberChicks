@@ -30,7 +30,8 @@
         <entry key="app/src/main/res/drawable/ic_outline_local_offer_24.xml" value="0.108" />
         <entry key="app/src/main/res/drawable/rounded_corner_shape.xml" value="0.328" />
         <entry key="app/src/main/res/drawable/rounded_corner_shape_2.xml" value="0.2815" />
-        <entry key="app/src/main/res/layout/dialog_fragment_add_cart.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rounded_corner_shape_dark.xml" value="0.2815" />
+        <entry key="app/src/main/res/layout/dialog_fragment_add_cart.xml" value="0.72" />
         <entry key="app/src/main/res/layout/fragment_cart_fragment.xml" value="0.271286231884058" />
         <entry key="app/src/main/res/layout/fragment_category_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1484375" />

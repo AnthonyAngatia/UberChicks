@@ -17,7 +17,12 @@ class CategoryListViewModel @Inject constructor(private val repository: Reposito
         repository.removeFromCart(productUiModel)
     }
 
-     val countAndPrice:Flow<Pair<Int, Double>> = repository.countAndPrice
+    suspend fun removeFromCart(productUi: ProductUiModel) {
+        Timber.i("At remove from Cart CAtegory list")
+        repository.removeFromCart(productUi)
+    }
+
+    val countAndPrice: Flow<Pair<Int, Double>> = repository.countAndPrice
 
     val categoriesFlow = repository.categoriesUiFlow
     val categoriesUiModel = categoriesFlow.asLiveData()

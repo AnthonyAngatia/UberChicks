@@ -139,7 +139,7 @@ class Repository @Inject constructor(
     }
 
     suspend fun removeFromCart(productUiModel: ProductUiModel) {
-
+        Timber.i("Delete from cart at repository")
         cartDao.deleteItem(productUiModel.asCartDatabaseModel())
     }
 }

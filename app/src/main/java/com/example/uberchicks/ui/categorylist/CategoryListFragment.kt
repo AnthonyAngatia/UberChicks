@@ -82,4 +82,10 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list),
             CategoryListFragmentDirections.actionGlobalAddCartDialogFragment(productUiModel)
         findNavController().navigate(action)
     }
+
+    override fun onRemoveClick(productUi: ProductUiModel) {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.removeFromCart(productUi)
+        }
+    }
 }

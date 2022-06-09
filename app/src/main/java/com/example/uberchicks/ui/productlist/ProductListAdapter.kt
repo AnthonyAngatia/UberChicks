@@ -63,6 +63,9 @@ class ProductListAdapter(val listener: OnItemClickListener) :
                         visibility = View.VISIBLE
                         text = "Kshs ${productUi.productDiscountedPrice}"
                     }
+                    textviewPriceDescription.setOnClickListener {
+                        listener.onRemoveClick(productUi)
+                    }
 
 
                 }
@@ -100,5 +103,7 @@ class ProductListAdapter(val listener: OnItemClickListener) :
 
     interface OnItemClickListener {
         fun onItemClick(product: ProductUiModel)
+
+        fun onRemoveClick(productUi: ProductUiModel)
     }
 }

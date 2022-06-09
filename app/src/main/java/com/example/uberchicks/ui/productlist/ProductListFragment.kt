@@ -48,4 +48,10 @@ class ProductListFragment : Fragment(R.layout.fragment_product_list), ProductLis
         val action = ProductListFragmentDirections.actionGlobalAddCartDialogFragment(productUi)
         findNavController().navigate(action)
     }
+
+    override fun onRemoveClick(productUi: ProductUiModel) {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.removeFromCart(productUi)
+        }
+    }
 }
