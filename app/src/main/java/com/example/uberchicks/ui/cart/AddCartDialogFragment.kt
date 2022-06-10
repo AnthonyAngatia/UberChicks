@@ -39,8 +39,9 @@ class AddCartDialogFragment : DialogFragment() {
             textViewQuantityAC.text = "Quantity ${args.productUI.quantity}"
             editTextQuantity.setText("${args.productUI.quantity}")
             textViewPriceDescriptionAC.text = args.productUI.priceDescription
-            val totalPrice = getPrice(args.productUI) * args.productUI.quantity!!
-            textViewTotalPrice.text = totalPrice.toString()
+            //TODO Resolve the bug regarding quantity
+//            val totalPrice = getPrice(args.productUI) * args.productUI.quantity!!
+//            textViewTotalPrice.text = totalPrice.toString()
             buttonCancel.setOnClickListener {
                 dismiss()
             }
