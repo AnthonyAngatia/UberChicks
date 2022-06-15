@@ -1,4 +1,4 @@
-package com.example.uberchicks.ui.cart
+package com.example.uberchicks.ui.cart.add
 
 import android.content.res.Configuration
 import android.graphics.Paint
@@ -14,7 +14,6 @@ import com.example.uberchicks.databinding.DialogFragmentAddCartBinding
 import com.example.uberchicks.domain.ProductUiModel
 import com.example.uberchicks.domain.asDomainModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class AddCartDialogFragment : DialogFragment() {
@@ -31,20 +30,19 @@ class AddCartDialogFragment : DialogFragment() {
         val binding = DialogFragmentAddCartBinding.inflate(inflater)
         args = AddCartDialogFragmentArgs.fromBundle(requireArguments())
 
-        confugureThemeResources()
+        configureThemeResources()
 
 
         binding.apply {
-            textViewProductNameAC.text = args.productUI.productName
-            textViewQuantityAC.text = "Quantity ${args.productUI.quantity}"
-            editTextQuantity.setText("${args.productUI.quantity}")
+            textViewProductNameAC.text = args.productUI.productName.replaceFirstChar { it.uppercase() }
+            val quantity = args.productUI.quantity ?: 1
+            textViewQuantityAC.text = "Quantity $quantity"
+            editTextQuantity.setText("$quantity")
             textViewPriceDescriptionAC.text = args.productUI.priceDescription
-            //TODO Resolve the bug regarding quantity
-//            val totalPrice = getPrice(args.productUI) * args.productUI.quantity!!
-//            textViewTotalPrice.text = totalPrice.toString()
-            buttonCancel.setOnClickListener {
-                dismiss()
-            }
+
+            val totalPrice = getPrice(args.productUI) * quantity
+            textViewTotalPrice.text = totalPrice.toString()
+
             if (args.productUI.productDiscountedPrice != null && args.productUI.productDiscountedPrice!! > 0.0) {
                 textViewPriceDescriptionAC.paintFlags =
                     textViewPriceDescriptionAC.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -55,7 +53,9 @@ class AddCartDialogFragment : DialogFragment() {
 
 
             }
-
+            buttonCancel.setOnClickListener {
+                dismiss()
+            }
             buttonAdd.setOnClickListener {
                 val input = binding.editTextQuantity.text.toString()
                 viewLifecycleOwner.lifecycleScope.launchWhenCreated {
@@ -75,10 +75,10 @@ class AddCartDialogFragment : DialogFragment() {
         }
     }
 
-    private fun confugureThemeResources() {
+    private fun configureThemeResources() {
         when (context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> {
-                getDialog()!!.getWindow()
+                getDialog()!!.window
                     ?.setBackgroundDrawableResource(R.drawable.rounded_corner_shape_dark);//Works better than seeting it in xml file
             }
             Configuration.UI_MODE_NIGHT_NO -> {

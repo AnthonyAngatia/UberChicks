@@ -11,6 +11,7 @@ import com.example.uberchicks.databinding.ItemProductBinding
 import com.example.uberchicks.domain.ProductUiModel
 import android.graphics.Paint;
 import android.view.View
+import timber.log.Timber
 
 class ProductListAdapter(val listener: OnItemClickListener) :
     ListAdapter<ProductUiModel, ProductListAdapter.ProductUiModelListViewHolder>(
@@ -42,8 +43,12 @@ class ProductListAdapter(val listener: OnItemClickListener) :
 //                Listen to tap on an item
 
             binding.root.setOnClickListener {
-
+                Timber.i("On item clicked")
                 listener.onItemClick(productUi)
+            }
+            binding.textViewRemoveCart.setOnClickListener {
+                Timber.i("On remove item")
+                listener.onRemoveClick(productUi)
             }
 
 
@@ -59,14 +64,10 @@ class ProductListAdapter(val listener: OnItemClickListener) :
                 if (productUi.productDiscountedPrice != null && productUi.productDiscountedPrice > 0.0) {
                     textviewPriceDescription.paintFlags =
                         textviewPriceDescription.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                    textViewDiscountedPrice.apply{
+                    textViewDiscountedPrice.apply {
                         visibility = View.VISIBLE
                         text = "Kshs ${productUi.productDiscountedPrice}"
                     }
-                    textviewPriceDescription.setOnClickListener {
-                        listener.onRemoveClick(productUi)
-                    }
-
 
                 }
                 if (productUi.quantity != null && productUi.quantity != 0) {
@@ -82,9 +83,9 @@ class ProductListAdapter(val listener: OnItemClickListener) :
         }
 
         private fun getPrice(productUi: ProductUiModel): Double {
-            return if (productUi.productDiscountedPrice == 0.0 || productUi.productDiscountedPrice == null){
-                 productUi.productPrice
-            }else{
+            return if (productUi.productDiscountedPrice == 0.0 || productUi.productDiscountedPrice == null) {
+                productUi.productPrice
+            } else {
                 productUi.productDiscountedPrice
             }
         }

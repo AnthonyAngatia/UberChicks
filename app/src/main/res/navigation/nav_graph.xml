@@ -31,7 +31,7 @@
     </fragment>
     <dialog
         android:id="@+id/addCartDialogFragment"
-        android:name="com.example.uberchicks.ui.cart.AddCartDialogFragment"
+        android:name="com.example.uberchicks.ui.cart.add.AddCartDialogFragment"
         android:label="dialog_fragment_add_cart"
         tools:layout="@layout/dialog_fragment_add_cart" >
         <argument
@@ -42,5 +42,21 @@
         android:id="@+id/cartFragment"
         android:name="com.example.uberchicks.ui.cart.CartFragment"
         android:label="fragment_cart_fragment"
-        tools:layout="@layout/fragment_cart_fragment" />
+        tools:layout="@layout/fragment_cart_fragment" >
+        <action
+            android:id="@+id/action_cartFragment_to_editCartDialogFragment"
+            app:destination="@id/editCartDialogFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_categoryListFragment"
+            app:destination="@id/categoryListFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/editCartDialogFragment"
+        android:name="com.example.uberchicks.ui.cart.edit.EditCartDialogFragment"
+        android:label="dialog_fragment_edit_cart"
+        tools:layout="@layout/dialog_fragment_edit_cart" >
+        <argument
+            android:name="productUi"
+            app:argType="com.example.uberchicks.domain.ProductUiModel" />
+    </dialog>
 </navigation>

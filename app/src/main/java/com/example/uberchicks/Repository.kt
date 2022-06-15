@@ -103,7 +103,7 @@ class Repository @Inject constructor(
             1, "eggs", 320.0, 0.0, "Ksh 320 per egss", ""
         )
         val prod2 = ProductDto(
-            2, "Broilers", 500.0, 0.0, "Ksh 320 per hen", ""
+            2, "Broilers", 500.0, 0.0, "Ksh 320 per broiler", ""
         )
         val prod3 = ProductDto(
             3, "Turkey", 450.0, 50.0, "Ksh 320 per turkey", ""
@@ -134,8 +134,12 @@ class Repository @Inject constructor(
 
     suspend fun insertToCart(item: Cart) {
         val cartDatabaseModel = item.asDatabaseModel()
-        Timber.i("Insert into cart method:${item.toString()}")
-        cartDao.insert(cartDatabaseModel)
+
+        if (item.quantity > 0){
+            cartDao.insert(cartDatabaseModel)
+        }else{
+            Timber.e("Ensure that you insert more than one item")
+        }
     }
 
     suspend fun removeFromCart(productUiModel: ProductUiModel) {

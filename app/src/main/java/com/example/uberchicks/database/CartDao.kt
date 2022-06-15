@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CartDao {
 
+    // OnConflictStrategy works as my @Update query
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(databaseModel: CartDatabaseModel)
 
@@ -42,19 +43,18 @@ data class CartDatabaseModel(
 )
 
 
-fun CartDatabaseModel.asDomainModel(): Cart {
-    return Cart(
-        product = Product(
-            this.productId,
-            this.productName,
-            this.productPrice,
-            this.productDiscount,
-            this.priceDescription,
-            this.imageUrl
-        ),
-        quantity = this.quantity
+fun CartDatabaseModel.asProductUiModel():ProductUiModel{
+    return ProductUiModel(
+        this.productId,
+        this.productName,
+        this.productPrice,
+        this.productDiscount,
+        this.priceDescription,
+        this.imageUrl,
+        this.quantity!!
     )
-}fun ProductUiModel.asCartDatabaseModel(): CartDatabaseModel {
+}
+fun ProductUiModel.asCartDatabaseModel(): CartDatabaseModel {
     return CartDatabaseModel(
             this.id,
             this.productName,
