@@ -2,68 +2,84 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
-    android:background="@drawable/cart_rectangle"
-    android:padding="8dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/abstract_shape_2"
-        android:gravity="center"
-        android:text="X14"
-        android:textColor="@color/secondaryTextColor"
+        android:background="@drawable/cart_rectangle"
+        android:backgroundTint="#33C4C4C4"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView3"
-        style="@style/TextAppearance.Subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Eggs"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        <TextView
+            android:id="@+id/textViewCartQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/abstract_shape_2"
+            android:gravity="center"
+            android:text="X14"
+            android:textColor="@color/secondaryTextColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView4"
-        style="@style/TextAppearance.body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kshs 320 per tray"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        <TextView
+            android:id="@+id/textViewProductName"
+            style="@style/TextAppearance.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Eggs"
+            app:layout_constraintStart_toEndOf="@+id/textViewCartQuantity"
+            app:layout_constraintTop_toTopOf="@+id/textViewCartQuantity" />
 
-    <TextView
-        android:id="@+id/textView5"
-        style="@style/TextAppearance.Subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kshs 25000"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/textViewPriceDescription"
+            style="@style/TextAppearance.body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kshs 320 per tray"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewCartQuantity"
+            app:layout_constraintStart_toStartOf="@+id/textViewProductName"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductName" />
 
+
+        <TextView
+            android:id="@+id/textViewItemTotalPrice"
+            style="@style/TextAppearance.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kshs 25000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ksh 320"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/textViewPriceDescription"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPriceDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/editButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:srcCompat="@drawable/ic_baseline_remove_circle_24" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
-        app:srcCompat="@drawable/ic_baseline_add_circle_24" />
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_corner_edit_button"
+        android:backgroundTint="@color/secondaryColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_edit_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

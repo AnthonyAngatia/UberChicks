@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import com.example.uberchicks.database.CartDao
 import com.example.uberchicks.database.CartDatabaseModel
+import com.example.uberchicks.database.asCartDatabaseModel
 import com.example.uberchicks.database.asDatabaseModel
 import com.example.uberchicks.domain.*
 import com.example.uberchicks.network.*
@@ -28,10 +29,28 @@ class Repository @Inject constructor(
     )
     val cartItemsFLow = cartDao.getAllCartItems()
 
-    val categoriesUiFlow:Flow<List<CategoryUi>> = combine(
+    val countAndPrice: Flow<Pair<Int, Double>> = cartItemsFLow.map { cartItems ->
+        val noOfItems = cartItems.size
+        var price = 0.0;
+        for (item in cartItems) {
+            price += getPrice(item)
+        }
+        Pair(noOfItems, price)
+    }
+
+
+    private fun getPrice(item: CartDatabaseModel): Double {
+        return if (item.productDiscount != null && item.productDiscount > 0.0) {
+            item.quantity * item.productDiscount
+        } else {
+            item.quantity * item.productPrice
+        }
+    }
+
+    val categoriesUiFlow: Flow<List<CategoryUi>> = combine(
         categoriesWithProductsFlow,
         cartItemsFLow
-    ){categoriesWithProducts:List<Category>, cartItems:List<CartDatabaseModel> ->
+    ) { categoriesWithProducts: List<Category>, cartItems: List<CartDatabaseModel> ->
         return@combine categoriesWithProducts.asCategoryUiModelList(cartItems)
     }
 
@@ -79,12 +98,12 @@ class Repository @Inject constructor(
 //        return productDtoList
     }
 
-     fun getCategoriesWithProducts(): List<CategoryDto> {
+    fun getCategoriesWithProducts(): List<CategoryDto> {
         val prod1 = ProductDto(
-            1, "eggs", 320.0, 50.0, "Ksh 320 per egss", ""
+            1, "eggs", 320.0, 0.0, "Ksh 320 per egss", ""
         )
         val prod2 = ProductDto(
-            2, "Broilers", 500.0, 50.0, "Ksh 320 per hen", ""
+            2, "Broilers", 500.0, 0.0, "Ksh 320 per broiler", ""
         )
         val prod3 = ProductDto(
             3, "Turkey", 450.0, 50.0, "Ksh 320 per turkey", ""
@@ -92,8 +111,8 @@ class Repository @Inject constructor(
 
         return listOf(
             CategoryDto(1, "Poultry", listOf(prod1, prod2, prod3, prod2, prod1, prod3)),
-            CategoryDto(2, "Vegetables", listOf(prod1, prod2)),
-            CategoryDto(3, "Animal Products", listOf(prod1, prod2, prod3))
+            CategoryDto(2, "Vegetables", listOf(prod1, prod3)),
+            CategoryDto(3, "Animal Products", listOf( prod2, prod3, prod1))
         )
 //        return uberChicksApiService.getCategoriesWithProducts()
     }
@@ -115,7 +134,16 @@ class Repository @Inject constructor(
 
     suspend fun insertToCart(item: Cart) {
         val cartDatabaseModel = item.asDatabaseModel()
-        Timber.i("Insert into cart method:${item.toString()}")
-        cartDao.insert(cartDatabaseModel)
+
+        if (item.quantity > 0){
+            cartDao.insert(cartDatabaseModel)
+        }else{
+            Timber.e("Ensure that you insert more than one item")
+        }
+    }
+
+    suspend fun removeFromCart(productUiModel: ProductUiModel) {
+        Timber.i("Delete from cart at repository")
+        cartDao.deleteItem(productUiModel.asCartDatabaseModel())
     }
 }

@@ -3,21 +3,32 @@ package com.example.uberchicks.database
 import androidx.room.*
 import com.example.uberchicks.domain.Cart
 import com.example.uberchicks.domain.Product
+import com.example.uberchicks.domain.ProductUiModel
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CartDao {
 
+    // OnConflictStrategy works as my @Update query
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(databaseModel: CartDatabaseModel)
 
     @Query("SELECT * FROM CART_TABLE")
-    fun getAllCartItems():Flow<List<CartDatabaseModel>>
+    fun getAllCartItems(): Flow<List<CartDatabaseModel>>
 
-    @Query("SELECT * FROM CART_TABLE WHERE productId = :id")
-    fun getOneItem(id:Int):Flow<CartDatabaseModel>
+    @Query("SELECT * FROM CART_TABLE WHERE productId = :key")
+    fun get(key: Int): Flow<CartDatabaseModel>
+
+    @Query("DELETE FROM cart_table")
+    fun clearCart()
+
+    @Delete
+    suspend fun deleteItem(cartDatabaseModel: CartDatabaseModel)
 
 }
+
+
+
 
 @Entity(tableName = "cart_table")
 data class CartDatabaseModel(
@@ -32,17 +43,26 @@ data class CartDatabaseModel(
 )
 
 
-fun CartDatabaseModel.asDomainModel(): Cart {
-    return Cart(
-        product = Product(
-            this.productId,
+fun CartDatabaseModel.asProductUiModel():ProductUiModel{
+    return ProductUiModel(
+        this.productId,
+        this.productName,
+        this.productPrice,
+        this.productDiscount,
+        this.priceDescription,
+        this.imageUrl,
+        this.quantity!!
+    )
+}
+fun ProductUiModel.asCartDatabaseModel(): CartDatabaseModel {
+    return CartDatabaseModel(
+            this.id,
             this.productName,
             this.productPrice,
-            this.productDiscount,
+            this.productDiscountedPrice,
             this.priceDescription,
-            this.imageUrl
-        ),
-        quantity = this.quantity
+            this.imageUrl,
+        this.quantity!!
     )
 }
 

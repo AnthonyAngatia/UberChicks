@@ -5,55 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    tools:context=".ui.cart.add.AddCartDialogFragment">
+    tools:context=".ui.cart.edit.EditCartDialogFragment">
 
 
     <TextView
-        android:id="@+id/textViewProductNameAC"
+        android:id="@+id/textViewProductNameEC"
         style="@style/TextAppearance.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Eggs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Eggs" />
 
     <TextView
-        android:id="@+id/textViewPriceDescriptionAC"
+        android:id="@+id/textViewPriceDescriptionEC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Kshs 320 per tray"
-        app:layout_constraintStart_toStartOf="@+id/textViewQuantityAC"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProductNameAC" />
+        app:layout_constraintStart_toStartOf="@+id/textViewQuantityEC"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProductNameEC" />
 
     <TextView
-        android:id="@+id/textViewQuantityAC"
+        android:id="@+id/textViewQuantityEC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Quantity 1"
-        app:layout_constraintStart_toStartOf="@+id/outlinedTextFieldQuantity"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPriceDescriptionAC" />
+        app:layout_constraintStart_toStartOf="@+id/outlinedTextFieldQuantityEC"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPriceDescriptionEC" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/textView17EC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total"
-        app:layout_constraintStart_toStartOf="@+id/textViewTotalPrice"
-        app:layout_constraintTop_toTopOf="@+id/textViewPriceDescriptionAC" />
+        app:layout_constraintStart_toStartOf="@+id/textViewTotalPriceEC"
+        app:layout_constraintTop_toTopOf="@+id/textViewPriceDescriptionEC" />
 
     <TextView
-        android:id="@+id/textViewTotalPrice"
+        android:id="@+id/textViewTotalPriceEC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kshs 320"
-        app:layout_constraintEnd_toEndOf="@+id/outlinedTextFieldQuantity"
-        app:layout_constraintTop_toTopOf="@+id/textViewQuantityAC" />
+        app:layout_constraintEnd_toEndOf="@+id/outlinedTextFieldQuantityEC"
+        app:layout_constraintTop_toTopOf="@+id/textViewQuantityEC" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/outlinedTextFieldQuantity"
+        android:id="@+id/outlinedTextFieldQuantityEC"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -61,44 +61,45 @@
         android:hint="Quantity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalPrice">
+        app:layout_constraintTop_toBottomOf="@+id/textViewTotalPriceEC">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextQuantity"
+            android:id="@+id/editTextQuantityEditCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:maxLength="4" />
+            android:maxLength="3" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button_cancel"
+        android:id="@+id/button_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_corner_shape"
-        android:text="cancel"
-        app:layout_constraintStart_toStartOf="@+id/outlinedTextFieldQuantity"
-        app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldQuantity" />
+        android:backgroundTint="@color/secondaryColor"
+        android:text="remove"
+        app:layout_constraintStart_toStartOf="@+id/outlinedTextFieldQuantityEC"
+        app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldQuantityEC" />
 
     <Button
-        android:id="@+id/button_add"
+        android:id="@+id/button_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_shape"
-        android:text="Add"
-        app:layout_constraintEnd_toEndOf="@+id/outlinedTextFieldQuantity"
-        app:layout_constraintTop_toTopOf="@+id/button_cancel" />
+        android:text="Edit"
+        app:layout_constraintEnd_toEndOf="@+id/outlinedTextFieldQuantityEC"
+        app:layout_constraintTop_toTopOf="@+id/button_remove" />
 
     <TextView
-        android:id="@+id/textViewDiscountedPriceAC"
+        android:id="@+id/textViewDiscountedPriceEC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="TextView"
         android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/textViewPriceDescriptionAC"
-        app:layout_constraintTop_toTopOf="@+id/textViewPriceDescriptionAC" />
+        app:layout_constraintStart_toEndOf="@+id/textViewPriceDescriptionEC"
+        app:layout_constraintTop_toTopOf="@+id/textViewPriceDescriptionEC" />
 </androidx.constraintlayout.widget.ConstraintLayout>

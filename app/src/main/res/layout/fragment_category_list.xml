@@ -33,12 +33,15 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
+        android:id="@+id/button_checkout_category_list"
         style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="8dp"
+        android:text="3 orders Kshs 2500"
+        android:visibility="invisible"
         app:background="@drawable/button"
         app:backgroundTint="@color/secondaryColor"
-        android:text="3 orders Kshs 2500" />
+        tools:visibility="visible" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,4 +1,4 @@
-package com.example.uberchicks.ui.cart
+package com.example.uberchicks.ui.cart.add
 
 import androidx.lifecycle.ViewModel
 import com.example.uberchicks.CartPreferences
