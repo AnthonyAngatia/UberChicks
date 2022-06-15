@@ -28,6 +28,19 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list),
 
         binding = FragmentCategoryListBinding.bind(view)
 
+        binding.toolBarCategorylist.toolbarHome.apply {
+            title = "Uberchicks"
+
+            setNavigationIcon(R.drawable.toolbar_image)
+
+            setNavigationOnClickListener{
+                //Navigate to user profile
+                //If User has not signed in yet, navigate to to sign up sign in page
+            }
+
+        }
+
+
         val categoryListAdapter = CategoryListAdapter(this)
 
         binding.recyclerViewCategoryList.apply {
