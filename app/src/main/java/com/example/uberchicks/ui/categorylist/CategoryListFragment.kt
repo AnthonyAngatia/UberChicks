@@ -33,9 +33,42 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list),
 
             setNavigationIcon(R.drawable.toolbar_image)
 
-            setNavigationOnClickListener{
+            setNavigationOnClickListener {
                 //Navigate to user profile
                 //If User has not signed in yet, navigate to to sign up sign in page
+                viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                    viewModel.isLoggedIn.collect { isLoggedIn ->
+                        Timber.i("Login status: $isLoggedIn")
+                        if (isLoggedIn) {
+                            //Navigate to profile page
+                        } else {
+                            //Navigate to Registration/ Login page
+                        }
+
+                    }
+                }
+            }
+
+            //Inflate menu
+            inflateMenu(R.menu.menu)
+
+            //Menu click listener
+            setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.menuitem_logout -> {
+                        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                            //TODO: Clear user preference
+                        }
+                        true
+                    }
+                    R.id.menuitem_clear_cart -> {
+                        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                            viewModel.clearCart()
+                        }
+                        true
+                    }
+                    else -> false
+                }
             }
 
         }
@@ -55,13 +88,14 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list),
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.countAndPrice.collect { countPricePair ->
                 val buttonCheckout = binding.buttonCheckoutCategoryList
-                if (countPricePair.first > 0  &&  countPricePair.second > 0.0) {
+                if (countPricePair.first > 0 && countPricePair.second > 0.0) {
                     buttonCheckout.apply {
                         visibility = View.VISIBLE
                         text = "${countPricePair.first} orders Kshs ${countPricePair.second}"
                         setOnClickListener {
                             Timber.i("Navigating to Cart")
-                            val action = CategoryListFragmentDirections.actionCategoryListFragmentToCartFragment()
+                            val action =
+                                CategoryListFragmentDirections.actionCategoryListFragmentToCartFragment()
                             findNavController().navigate(action)
                         }
                     }
@@ -79,7 +113,7 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list),
 //            categoryListAdapter.submitList(categoryList)
 //        }
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.categoriesFlow.collect{
+            viewModel.categoriesFlow.collect {
                 categoryListAdapter.submitList(it)
             }
         }

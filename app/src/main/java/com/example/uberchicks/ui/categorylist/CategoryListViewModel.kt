@@ -3,6 +3,7 @@ package com.example.uberchicks.ui.categorylist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.uberchicks.Repository
+import com.example.uberchicks.UserRepository
 import com.example.uberchicks.domain.ProductUiModel
 import com.example.uberchicks.network.CategoryDto
 import com.example.uberchicks.network.ProductDto
@@ -12,7 +13,10 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoryListViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class CategoryListViewModel @Inject constructor(private val repository: Repository,
+                                                private val userRepository: UserRepository) : ViewModel() {
+
+    val isLoggedIn = userRepository.isLoggedIn
     suspend fun deleteFromDatabase(productUiModel: ProductUiModel) {
         repository.removeFromCart(productUiModel)
     }
@@ -20,6 +24,10 @@ class CategoryListViewModel @Inject constructor(private val repository: Reposito
     suspend fun removeFromCart(productUi: ProductUiModel) {
         Timber.i("At remove from Cart CAtegory list")
         repository.removeFromCart(productUi)
+    }
+
+    suspend fun clearCart() {
+        repository.clearCart()
     }
 
     val countAndPrice: Flow<Pair<Int, Double>> = repository.countAndPrice

@@ -13,6 +13,7 @@ import com.example.uberchicks.database.asProductUiModel
 import com.example.uberchicks.databinding.FragmentCartFragmentBinding
 import com.example.uberchicks.domain.ProductUiModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class CartFragment : Fragment(R.layout.fragment_cart_fragment), CartAdapter.onCartCLickListener {
@@ -30,8 +31,9 @@ class CartFragment : Fragment(R.layout.fragment_cart_fragment), CartAdapter.onCa
 
             setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
 
-            setNavigationOnClickListener{
+            setNavigationOnClickListener {
                 //NAvigate back to the previous fragment
+                findNavController().popBackStack()
             }
         }
 
@@ -47,15 +49,13 @@ class CartFragment : Fragment(R.layout.fragment_cart_fragment), CartAdapter.onCa
                 val productUiModels = cartItems.map {
                     it.asProductUiModel()
                 }
+                Timber.i("Lenght of cart items ${cartItems.size}")
                 if (productUiModels.isEmpty()) {
-                    //TODO: Navigate back
-//                    val action = CartFragmentDirections.actionCartFragmentToCategoryListFragment()
-//                    findNavController().navigate(action)
-                    cartAdapter.submitList(productUiModels)
-
-                } else {
-                    cartAdapter.submitList(productUiModels)
+                    Timber.i("UI models is empty")
+                    findNavController().popBackStack()
                 }
+                cartAdapter.submitList(productUiModels)
+
             }
         }
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
