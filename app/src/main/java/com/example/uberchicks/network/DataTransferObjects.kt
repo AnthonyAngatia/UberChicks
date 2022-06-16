@@ -55,3 +55,4 @@ fun CategoryDto.asDomainObject(): Category {
         }
     )
 }
+
