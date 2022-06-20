@@ -1,6 +1,7 @@
 package com.example.uberchicks.ui.registration
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import android.widget.Button
 import android.widget.EditText
@@ -36,7 +37,14 @@ class RegistrationFragment : Fragment() {
             val last_name=last_name.text.toString().trim()
             val password=password.text.toString().trim()
 
+            fun signup(email:String, first_name:String, last_name:String,password:String) {
+                //call retrofit instance
+                val retIn = Retrofit.
+            }
+
         }
         DataTransferObjects.instance.createUser
     }
+
+
 }
