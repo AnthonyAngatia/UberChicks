@@ -10,13 +10,14 @@ import com.example.uberchicks.R
 import com.example.uberchicks.databinding.ItemProductBinding
 import com.example.uberchicks.domain.Product
 
-class ProductListAdapter(val listener:OnItemClickListener) :
+class ProductListAdapter(val listener: OnItemClickListener) :
     ListAdapter<Product, ProductListAdapter.ProductListViewHolder>(ProductListDiffCallBack()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListViewHolder {
         val binding = ItemProductBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false )
+            LayoutInflater.from(parent.context), parent, false
+        )
         return ProductListViewHolder(binding)
     }
 
@@ -26,29 +27,29 @@ class ProductListAdapter(val listener:OnItemClickListener) :
 
     }
 
-    inner class ProductListViewHolder(private val binding: ItemProductBinding)
-        :RecyclerView.ViewHolder(binding.root){
+    inner class ProductListViewHolder(private val binding: ItemProductBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
 
-            fun binding(product:Product){
+        fun binding(product: Product) {
 //                Listen to tap on an item
-                binding.root.setOnClickListener {
-                    listener.onItemClick(product)
-                }
+            binding.root.setOnClickListener {
+                listener.onItemClick(product)
+            }
 
 //                Bind views to data
-                binding.apply {
-                    Glide.with(itemView)
-                        .load(product.imageUrl)
-                        .centerCrop()
-                        .error(R.drawable.abstract_shape_2)
-                        .into(imageViewProduct)
-                    textviewProductName.text = product.productName
-                    textviewPriceDescription.text = product.priceDescription
-                }
-
-
+            binding.apply {
+                Glide.with(itemView)
+                    .load(product.imageUrl)
+                    .centerCrop()
+                    .error(R.drawable.abstract_shape_2)
+                    .into(imageViewProduct)
+                textviewProductName.text = product.productName
+                textviewPriceDescription.text = product.priceDescription
             }
+
+
+        }
     }
 
     class ProductListDiffCallBack : DiffUtil.ItemCallback<Product>() {

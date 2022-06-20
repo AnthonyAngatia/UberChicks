@@ -1,23 +1,20 @@
 package com.example.uberchicks.ui.login
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.uberchicks.R
-import retrofit2.Retrofit
+import com.example.uberchicks.ui.productlist.ProductListAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(R.layout.fragment_login), LoginAdapter.OnItemClickListener {
+    private lateinit var binding: LoginFragmentBinding
+    private val viewModel: LoginViewModel by viewModels()
 
-    private fun signin(email: String, password: String){
-        val retIn = Ret.
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding=LoginFragmentBinding.bind(view)
+
     }
 }
