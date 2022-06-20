@@ -2,7 +2,6 @@ package com.example.uberchicks.ui.productlist
 
 import android.os.Bundle
 import android.view.View
-import android.widget.GridLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -10,7 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.uberchicks.R
 import com.example.uberchicks.databinding.FragmentProductListBinding
-import com.example.uberchicks.domain.Product
+import com.example.uberchicks.domain.ProductUiModel
+import com.example.uberchicks.domain.asProductUiModel
 import com.example.uberchicks.network.asDomainObject
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,8 +34,8 @@ class ProductListFragment : Fragment(R.layout.fragment_product_list), ProductLis
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             //Fetch list of products form the backend
-            val productList: List<Product> = viewModel.getProducts().map { productDto ->
-                productDto.asDomainObject()
+            val productList: List<ProductUiModel> = viewModel.getProducts().map { productDto ->
+                productDto.asDomainObject().asProductUiModel()
             }
             productAdapter.submitList(productList)
 
@@ -44,8 +44,14 @@ class ProductListFragment : Fragment(R.layout.fragment_product_list), ProductLis
 
     }
 
-    override fun onItemClick(product: Product) {
-        val action = ProductListFragmentDirections.actionGlobalAddCartDialogFragment(product)
+    override fun onItemClick(productUi: ProductUiModel) {
+        val action = ProductListFragmentDirections.actionGlobalAddCartDialogFragment(productUi)
         findNavController().navigate(action)
+    }
+
+    override fun onRemoveClick(productUi: ProductUiModel) {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.removeFromCart(productUi)
+        }
     }
 }
