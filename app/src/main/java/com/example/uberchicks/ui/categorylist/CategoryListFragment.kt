@@ -28,6 +28,54 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list),
 
         binding = FragmentCategoryListBinding.bind(view)
 
+        setupToolBar()
+
+
+        val categoryListAdapter = CategoryListAdapter(this)
+
+        binding.recyclerViewCategoryList.apply {
+            layoutManager = LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+            adapter = categoryListAdapter
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.categoriesFlow.collect {
+                categoryListAdapter.submitList(it)
+            }
+        }
+        setupCheckoutButton()
+
+
+    }
+
+    private fun setupCheckoutButton() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.countAndPrice.collect { countPricePair ->
+                val buttonCheckout = binding.buttonCheckoutCategoryList
+                if (countPricePair.first > 0 && countPricePair.second > 0.0) {
+                    buttonCheckout.apply {
+                        visibility = View.VISIBLE
+                        text = "${countPricePair.first} orders Kshs ${countPricePair.second}"
+                        setOnClickListener {
+                            Timber.i("Navigating to Cart")
+                            val action =
+                                CategoryListFragmentDirections.actionCategoryListFragmentToCartFragment()
+                            findNavController().navigate(action)
+                        }
+                    }
+                } else {
+                    buttonCheckout.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+
+    private fun setupToolBar() {
         binding.toolBarCategorylist.toolbarHome.apply {
             title = "Uberchicks"
 
@@ -72,57 +120,8 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list),
             }
 
         }
-
-
-        val categoryListAdapter = CategoryListAdapter(this)
-
-        binding.recyclerViewCategoryList.apply {
-            layoutManager = LinearLayoutManager(
-                context,
-                LinearLayoutManager.VERTICAL,
-                false
-            )
-            adapter = categoryListAdapter
-        }
-
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.countAndPrice.collect { countPricePair ->
-                val buttonCheckout = binding.buttonCheckoutCategoryList
-                if (countPricePair.first > 0 && countPricePair.second > 0.0) {
-                    buttonCheckout.apply {
-                        visibility = View.VISIBLE
-                        text = "${countPricePair.first} orders Kshs ${countPricePair.second}"
-                        setOnClickListener {
-                            Timber.i("Navigating to Cart")
-                            val action =
-                                CategoryListFragmentDirections.actionCategoryListFragmentToCartFragment()
-                            findNavController().navigate(action)
-                        }
-                    }
-                } else {
-                    buttonCheckout.visibility = View.GONE
-                }
-            }
-        }
-//        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-//            //Get categories
-//            val categoryList = viewModel.getCategories().map {
-//                it.asDomainObject()
-//            }
-//            //If product.id is not in the database, then put the default UI models, else update the quantity
-//            categoryListAdapter.submitList(categoryList)
-//        }
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.categoriesFlow.collect {
-                categoryListAdapter.submitList(it)
-            }
-        }
-
-
-//        viewModel.categoriesUiModel.observe(viewLifecycleOwner) {
-//            categoryListAdapter.submitList(it)
-//        }
     }
+
 
     override fun onItemClick(productUiModel: ProductUiModel) {
         val action =
