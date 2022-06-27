@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LoginFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginFragment">
@@ -14,9 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
+        android:fontFamily="@font/lato_bold"
         android:text="@string/str_login_jambo"
         android:textSize="48dp"
-        android:fontFamily="@font/lato_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,9 +26,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/lato_light"
         android:text="@string/str_login_welcome_back"
         android:textSize="32dp"
-        android:fontFamily="@font/lato_light"
         app:layout_constraintEnd_toEndOf="@+id/txt_jambo_login"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txt_jambo_login"
@@ -89,6 +90,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_create_account"
         app:layout_constraintVertical_bias="0.89" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
