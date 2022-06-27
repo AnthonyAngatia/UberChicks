@@ -8,17 +8,24 @@
     android:onClick="checkRegistratationData"
     tools:context=".ui.registration.RegistrationFragment">
 
+    <include
+        android:id="@+id/tool_bar_registration"
+        layout="@layout/toolbar_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/lbl_create_account_prompt"
         android:layout_width="185dp"
         android:layout_height="125dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/lato_bold"
         android:text="Create Account"
         android:textSize="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar_registration" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/outlinedRegTextEmailField"

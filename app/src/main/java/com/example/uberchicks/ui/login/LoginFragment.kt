@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.uberchicks.R
 import com.example.uberchicks.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -14,7 +16,24 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater)
-        // Inflate the layout for this fragment
+
+
+        //Setting up toolbar
+        binding.toolBarLogin.toolbarHome.apply {
+            title = "Uberchicks"
+
+            setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+
+            setNavigationOnClickListener {
+                //NAvigate back to the previous fragment
+                findNavController().popBackStack()
+            }
+        }
+        binding.buttonCreateAccount.setOnClickListener {
+            val action = LoginFragmentDirections.actionLoginFragmentToRegistrationFragment()
+            findNavController().navigate(action)
+        }
+
         return binding.root
     }
 }

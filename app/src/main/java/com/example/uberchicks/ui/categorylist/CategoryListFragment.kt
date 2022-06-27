@@ -92,6 +92,8 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list),
                             //Navigate to profile page
                         } else {
                             //Navigate to Registration/ Login page
+                            val action = CategoryListFragmentDirections.actionGlobalLoginFragment()
+                            findNavController().navigate(action)
                         }
 
                     }

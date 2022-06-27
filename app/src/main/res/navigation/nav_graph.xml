@@ -3,17 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/LoginFragment">
+    app:startDestination="@id/categoryListFragment">
 
     <fragment
         android:id="@+id/RegistrationFragment"
         android:name="com.example.uberchicks.ui.registration.RegistrationFragment"
         android:label="registration_fragment"
-        tools:layout="@layout/fragment_registration" >
-        <action
-            android:id="@+id/action_RegistrationFragment_to_LoginFragment"
-            app:destination="@id/LoginFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_registration" />
 
     <fragment
         android:id="@+id/LoginFragment"
@@ -21,8 +17,8 @@
         android:label="login_fragment"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_LoginFragment_to_productListFragment"
-            app:destination="@id/productListFragment" />
+            android:id="@+id/action_LoginFragment_to_RegistrationFragment"
+            app:destination="@id/RegistrationFragment" />
     </fragment>
 
     <fragment
@@ -80,4 +76,5 @@
             android:name="productUi"
             app:argType="com.example.uberchicks.domain.ProductUiModel" />
     </dialog>
+    <action android:id="@+id/action_global_LoginFragment" app:destination="@id/LoginFragment" />
 </navigation>
