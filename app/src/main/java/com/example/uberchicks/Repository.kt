@@ -29,6 +29,10 @@ class Repository @Inject constructor(
     )
     val cartItemsFLow = cartDao.getAllCartItems()
 
+    val isCartEmpty:Flow<Boolean> = cartItemsFLow.map {
+        it.isEmpty()
+    }
+
     val countAndPrice: Flow<Pair<Int, Double>> = cartItemsFLow.map { cartItems ->
         val noOfItems = cartItems.size
         var price = 0.0;

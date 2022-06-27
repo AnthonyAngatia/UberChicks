@@ -10,7 +10,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menuitem_clear_cart"
-        android:icon="@drawable/ic_baseline_remove_shopping_cart_24"
+        android:icon="@drawable/ic_baseline_delete_forever_24"
         android:title="Clear cart"
         app:showAsAction="ifRoom" />
     <item

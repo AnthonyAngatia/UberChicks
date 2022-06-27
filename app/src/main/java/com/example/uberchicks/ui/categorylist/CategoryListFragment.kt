@@ -1,6 +1,7 @@
 package com.example.uberchicks.ui.categorylist
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,8 +13,8 @@ import com.example.uberchicks.databinding.FragmentCategoryListBinding
 import com.example.uberchicks.domain.ProductUiModel
 import com.example.uberchicks.ui.productlist.ProductListAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import timber.log.Timber
+
 
 @AndroidEntryPoint
 class CategoryListFragment : Fragment(R.layout.fragment_category_list),
@@ -99,6 +100,14 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list),
 
             //Inflate menu
             inflateMenu(R.menu.menu)
+
+            //Show clearcart menu item
+            val clearCartMenuItem: MenuItem = menu.findItem(R.id.menuitem_clear_cart)
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.isCartEmpty.collect{ isCartEmpty->
+                    clearCartMenuItem.isVisible = !isCartEmpty
+                }
+            }
 
             //Menu click listener
             setOnMenuItemClickListener { menuItem ->

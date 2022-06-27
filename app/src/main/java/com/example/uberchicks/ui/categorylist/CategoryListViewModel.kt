@@ -16,7 +16,16 @@ import javax.inject.Inject
 class CategoryListViewModel @Inject constructor(private val repository: Repository,
                                                 private val userRepository: UserRepository) : ViewModel() {
 
+    val isCartEmpty = repository.isCartEmpty
+
     val isLoggedIn = userRepository.isLoggedIn
+
+    val countAndPrice: Flow<Pair<Int, Double>> = repository.countAndPrice
+
+    val categoriesFlow = repository.categoriesUiFlow
+
+    val categoriesUiModel = categoriesFlow.asLiveData()
+
     suspend fun deleteFromDatabase(productUiModel: ProductUiModel) {
         repository.removeFromCart(productUiModel)
     }
@@ -29,11 +38,6 @@ class CategoryListViewModel @Inject constructor(private val repository: Reposito
     suspend fun clearCart() {
         repository.clearCart()
     }
-
-    val countAndPrice: Flow<Pair<Int, Double>> = repository.countAndPrice
-
-    val categoriesFlow = repository.categoriesUiFlow
-    val categoriesUiModel = categoriesFlow.asLiveData()
 
 //    suspend fun getCategories(): List<CategoryDto> {
 ////        try {
