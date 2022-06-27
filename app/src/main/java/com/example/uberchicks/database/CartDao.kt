@@ -20,7 +20,7 @@ interface CartDao {
     fun get(key: Int): Flow<CartDatabaseModel>
 
     @Query("DELETE FROM cart_table")
-    fun clearCart()
+    suspend fun clearCart()
 
     @Delete
     suspend fun deleteItem(cartDatabaseModel: CartDatabaseModel)
