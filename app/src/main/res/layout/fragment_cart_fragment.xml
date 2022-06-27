@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.cart.CartFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cartItemsConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <include
+            android:id="@+id/tool_bar_cart"
+            layout="@layout/toolbar_fragment"/>
 
         <TextView
             android:id="@+id/labelSelectedProduct"
@@ -20,12 +24,13 @@
             android:text="@string/selected_products"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tool_bar_cart" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cartItemsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_anchor="@+id/cartItemsConstraintLayout"
             app:layout_anchorGravity="center"
             app:layout_constraintEnd_toEndOf="@+id/labelSelectedProduct"
