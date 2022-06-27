@@ -119,3 +119,17 @@ fun Product.asProductUiModel(): ProductUiModel {
 //    )
 //
 //}
+
+data class UserDetails(
+    val userID: Int,
+    var email: String,
+    val first_name: String,
+    val last_name: String,
+    val phoneNumber: Number,
+    val password: String
+)
+
+data class SignInBody(
+    val email: String,
+    val password: String
+)
