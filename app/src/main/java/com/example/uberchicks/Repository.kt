@@ -29,6 +29,10 @@ class Repository @Inject constructor(
     )
     val cartItemsFLow = cartDao.getAllCartItems()
 
+    val isCartEmpty:Flow<Boolean> = cartItemsFLow.map {
+        it.isEmpty()
+    }
+
     val countAndPrice: Flow<Pair<Int, Double>> = cartItemsFLow.map { cartItems ->
         val noOfItems = cartItems.size
         var price = 0.0;
@@ -54,7 +58,7 @@ class Repository @Inject constructor(
         return@combine categoriesWithProducts.asCategoryUiModelList(cartItems)
     }
 
-
+    // Emitting preferences
     val cartPreferencesFlow: Flow<CartPreferences> = dataStore.data.catch { exception ->
         if (exception is IOException) {
             Timber.e("IOException when emitting cart preferences as a flow")
@@ -63,6 +67,22 @@ class Repository @Inject constructor(
     }.map { preferences ->
         val cartPreference = mapCartPreference(preferences)
         cartPreference
+    }
+
+    // Add to Preference
+    suspend fun addToCart(cartPreferences: CartPreferences) {
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.QUANTITY] = cartPreferences.quantity
+
+            preferences[PreferenceKeys.ID] = cartPreferences.product.id
+            preferences[PreferenceKeys.PRODUCT_NAME] = cartPreferences.product.productName
+            preferences[PreferenceKeys.PRODUCT_PRICE] = cartPreferences.product.productPrice
+            preferences[PreferenceKeys.PRODUCT_DISCOUNT] =
+                cartPreferences.product.productDiscount ?: 0.0
+            preferences[PreferenceKeys.PRICE_DESCRIPTION] = cartPreferences.product.priceDescription
+            preferences[PreferenceKeys.IMAGE_URL] = cartPreferences.product.imageUrl
+
+        }
     }
 
     private fun mapCartPreference(preferences: Preferences): CartPreferences {
@@ -112,32 +132,17 @@ class Repository @Inject constructor(
         return listOf(
             CategoryDto(1, "Poultry", listOf(prod1, prod2, prod3, prod2, prod1, prod3)),
             CategoryDto(2, "Vegetables", listOf(prod1, prod3)),
-            CategoryDto(3, "Animal Products", listOf( prod2, prod3, prod1))
+            CategoryDto(3, "Animal Products", listOf(prod2, prod3, prod1))
         )
 //        return uberChicksApiService.getCategoriesWithProducts()
-    }
-
-    suspend fun addToCart(cartPreferences: CartPreferences) {
-        dataStore.edit { preferences ->
-            preferences[PreferenceKeys.QUANTITY] = cartPreferences.quantity
-
-            preferences[PreferenceKeys.ID] = cartPreferences.product.id
-            preferences[PreferenceKeys.PRODUCT_NAME] = cartPreferences.product.productName
-            preferences[PreferenceKeys.PRODUCT_PRICE] = cartPreferences.product.productPrice
-            preferences[PreferenceKeys.PRODUCT_DISCOUNT] =
-                cartPreferences.product.productDiscount ?: 0.0
-            preferences[PreferenceKeys.PRICE_DESCRIPTION] = cartPreferences.product.priceDescription
-            preferences[PreferenceKeys.IMAGE_URL] = cartPreferences.product.imageUrl
-
-        }
     }
 
     suspend fun insertToCart(item: Cart) {
         val cartDatabaseModel = item.asDatabaseModel()
 
-        if (item.quantity > 0){
+        if (item.quantity > 0) {
             cartDao.insert(cartDatabaseModel)
-        }else{
+        } else {
             Timber.e("Ensure that you insert more than one item")
         }
     }
@@ -145,5 +150,9 @@ class Repository @Inject constructor(
     suspend fun removeFromCart(productUiModel: ProductUiModel) {
         Timber.i("Delete from cart at repository")
         cartDao.deleteItem(productUiModel.asCartDatabaseModel())
+    }
+
+    suspend fun clearCart() {
+        cartDao.clearCart()
     }
 }
