@@ -55,3 +55,30 @@ fun CategoryDto.asDomainObject(): Category {
         }
     )
 }
+
+/**
+ * User
+ * */
+data class UserDto(
+    val userId:Int,
+    @Json(name="first_name")
+    val firstName:String,
+    @Json(name="last_name")
+    val lastName:String,
+    @Json(name="password")
+    val password:String
+
+)
+
+/**
+ * Extension function of User model to convert it into a domain object
+ * */
+fun UserDto.asDomainObject(): UserDto {
+    return UserDto(
+        userId = this.userId,
+        firstName = this.firstName,
+        lastName = this.lastName,
+        password = this.password,
+    )
+}
+
