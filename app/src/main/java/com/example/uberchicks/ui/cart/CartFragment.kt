@@ -43,6 +43,12 @@ class CartFragment : Fragment(R.layout.fragment_cart_fragment), CartAdapter.onCa
         binding.cartItemsRecyclerView.apply {
             adapter = cartAdapter
         }
+
+        binding.btnCheckout.setOnClickListener {
+            val action = CartFragmentDirections.actionCartFragmentToCheckoutFragment()
+            findNavController().navigate(action)
+        }
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.cartItems.collect { cartItems ->
                 //Submit list to adapter

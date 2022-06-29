@@ -5,7 +5,6 @@
     android:id="@+id/RegistrationFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="checkRegistratationData"
     tools:context=".ui.registration.RegistrationFragment">
 
     <include
@@ -18,8 +17,8 @@
     <TextView
         android:id="@+id/lbl_create_account_prompt"
         android:layout_width="185dp"
-        android:layout_height="125dp"
-        android:layout_marginStart="40dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lato_bold"
         android:text="Create Account"
@@ -125,7 +124,7 @@
         android:layout_width="96dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:background="@color/secondaryColor"
+        android:background="@drawable/rounded_corner_shape"
         android:fontFamily="@font/lato_bold"
         android:shadowRadius="10"
         android:text="@string/txt_sign_up_text"
