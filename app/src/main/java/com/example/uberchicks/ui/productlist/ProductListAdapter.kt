@@ -27,6 +27,7 @@ class ProductListAdapter(val listener: OnItemClickListener) :
             LayoutInflater.from(parent.context), parent, false
         )
         return ProductUiModelListViewHolder(binding)
+
     }
 
     override fun onBindViewHolder(holder: ProductUiModelListViewHolder, position: Int) {
@@ -51,7 +52,6 @@ class ProductListAdapter(val listener: OnItemClickListener) :
                 listener.onRemoveClick(productUi)
             }
 
-
 //                Bind views to data
             binding.apply {
                 Glide.with(itemView)
@@ -74,6 +74,7 @@ class ProductListAdapter(val listener: OnItemClickListener) :
                     val price = getPrice(productUi)
                     val totalPrice = price * productUi.quantity!!
 
+
                     textViewAddCart.visibility = View.INVISIBLE
                     textViewRemoveCart.visibility = View.VISIBLE
                     textViewRemoveCart.text = "${productUi.quantity} items Kshs ${totalPrice}"
@@ -88,6 +89,7 @@ class ProductListAdapter(val listener: OnItemClickListener) :
             } else {
                 productUi.productDiscountedPrice
             }
+
         }
     }
 

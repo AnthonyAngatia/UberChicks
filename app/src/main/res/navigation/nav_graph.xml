@@ -6,6 +6,29 @@
     app:startDestination="@id/categoryListFragment">
 
     <fragment
+        android:id="@+id/RegistrationFragment"
+        android:name="com.example.uberchicks.ui.registration.RegistrationFragment"
+        android:label="registration_fragment"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_RegistrationFragment_to_otpFragment"
+            app:destination="@id/otpFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.example.uberchicks.ui.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_LoginFragment_to_RegistrationFragment"
+            app:destination="@id/RegistrationFragment" />
+        <action
+            android:id="@+id/action_LoginFragment_to_otpFragment"
+            app:destination="@id/otpFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.example.uberchicks.ui.categorylist.CategoryListFragment"
         android:label="fragment_category_list"
@@ -28,6 +51,7 @@
         <action
             android:id="@+id/action_productListFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+
     </fragment>
     <dialog
         android:id="@+id/addCartDialogFragment"
@@ -49,6 +73,9 @@
         <action
             android:id="@+id/action_cartFragment_to_categoryListFragment"
             app:destination="@id/categoryListFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
     </fragment>
     <dialog
         android:id="@+id/editCartDialogFragment"
@@ -59,4 +86,15 @@
             android:name="productUi"
             app:argType="com.example.uberchicks.domain.ProductUiModel" />
     </dialog>
+    <action android:id="@+id/action_global_LoginFragment" app:destination="@id/LoginFragment" />
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.example.uberchicks.ui.checkout.CheckoutFragment"
+        android:label="fragment_checkout"
+        tools:layout="@layout/fragment_checkout" />
+    <fragment
+        android:id="@+id/otpFragment"
+        android:name="com.example.uberchicks.ui.login.OtpFragment"
+        android:label="fragment_otp"
+        tools:layout="@layout/fragment_otp" /><action android:id="@+id/action_global_categoryListFragment" app:destination="@id/categoryListFragment"/>
 </navigation>

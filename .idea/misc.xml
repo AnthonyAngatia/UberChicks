@@ -34,11 +34,16 @@
         <entry key="app/src/main/res/drawable/rounded_corner_shape.xml" value="0.328" />
         <entry key="app/src/main/res/drawable/rounded_corner_shape_2.xml" value="0.2815" />
         <entry key="app/src/main/res/drawable/rounded_corner_shape_dark.xml" value="0.2815" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22846781504986402" />
         <entry key="app/src/main/res/layout/dialog_fragment_add_cart.xml" value="0.72" />
         <entry key="app/src/main/res/layout/dialog_fragment_edit_cart.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/fragment_cart_fragment.xml" value="0.271286231884058" />
         <entry key="app/src/main/res/layout/fragment_category_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_checkout.xml" value="0.12099187687045745" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1284881299458559" />
+        <entry key="app/src/main/res/layout/fragment_otp.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1484375" />
+        <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_cart_item.xml" value="0.6251673360107095" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.536" />
         <entry key="app/src/main/res/layout/toolbar_fragment.xml" value="0.22846781504986402" />

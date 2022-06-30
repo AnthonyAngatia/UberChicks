@@ -37,6 +37,7 @@ data class UserPreference(
     val userId: String,
     val firstName:String,
     val lastName:String,
+    val phoneNumber:String,
     val userEmail: String,
     val token: String,
     val isLoggedIn:Boolean
@@ -46,6 +47,7 @@ object UserPreferenceKeys{
     val USER_ID = stringPreferencesKey("user_id")
     val FIRST_NAME = stringPreferencesKey("first_name")
     val LAST_NAME = stringPreferencesKey("last_name")
+    val PHONE_NUMBER = stringPreferencesKey("phone_number")
     val USER_EMAIL = stringPreferencesKey("user_email")
     val TOKEN = stringPreferencesKey("token")
     val IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
