@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-  
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_menu_profile_name"
+        android:title=""
+        app:showAsAction="always"
+        />
+    <!--
+        Make sure to add the title name to match the profile name
+    -->
+    <item
+        android:id="@+id/nav_menu_my_orders"
+        android:icon="@drawable/ic_baseline_arrow_forward"
+        android:title="My Orders"
+        android:onClick="show_orders"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/nav_menu_my_profile"
+        android:icon="@drawable/ic_baseline_arrow_forward"
+        android:title="My Profile"
+        app:showAsAction="always"
+        android:onClick="loadProfile"/>
+    <item
+        android:id="@+id/nav_menu_logout"
+        android:title="Logout"
+        app:showAsAction="ifRoom"
+        android:onClick="logout"/>
 </menu>

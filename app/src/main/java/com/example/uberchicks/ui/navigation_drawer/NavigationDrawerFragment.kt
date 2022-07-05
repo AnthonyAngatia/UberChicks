@@ -1,4 +1,4 @@
-package com.example.uberchicks
+package com.example.uberchicks.ui.navigation_drawer
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
